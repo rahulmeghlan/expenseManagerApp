@@ -2,18 +2,15 @@
     <div class="filter-option">
         <span>Filter by friend:</span>
         <select name="filter-friend">
-            <option value="Andy">Andy</option>
-            <option value="Sandy">Sandy</option>
-            <option value="Randy">Randy</option>
-            <option value="Mandy">Mandy</option>
+            <option data-ng-repeat="item in items" value="{{item.name}}">{{item.name}}</option>
         </select>
     </div>
     <div class="filter-option">
         <span>Currency:</span>
-        <select name="filter-currency">
-            <option value="dollar">USD</option>
-            <option value="rupee">INR</option>
-            <option value="euro">EUR</option>
+        <select name="filter-currency" data-ng-model="selectedCurrency" data-ng-change="changeCurrency()">
+            <option data-ng-repeat="currency in currencies" value="{{currency}}"
+                    data-ng-selected="currency === selectedCurrency">{{currency}}
+            </option>
         </select>
     </div>
 </div>
@@ -27,8 +24,14 @@
         <th class="table-btn">edit</th>
         <th class="table-btn">delete</th>
     </tr>
-    <tr id="if-empty">
-        <td colspan="4"><span>Your added items will show up here!</span></td>
+    <tr data-ng-repeat="item in items">
+        <td>{{item.type}}</td>
+        <td>{{item.spentOn}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.date}}</td>
+        <td class="amount">{{item.amount}}</td>
+        <td><i class="fa fa-pencil"></i></td>
+        <td><i class="fa fa-trash-o"></i></td>
     </tr>
 
 </table>
