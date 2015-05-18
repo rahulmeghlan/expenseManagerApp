@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Simple expense manager project - CodePen</title>
+
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<h1>Simple expense manager project</h1>
+
+<div data-ng-include="'js/modules/data-entry/data-entry.html'" data-ng-controller="dataEntry"></div>
+<div data-ng-include="'js/modules/data-view/data-view.html'" data-ng-controller="dataView"></div>
+
+
+<script src='js/libs/angular.js'></script>
+
+<script src="js/init.js"></script>
+<script src="js/modules/data-entry/controller.js"></script>
+<script src="js/modules/data-view/controller.js"></script>
+
+</body>
+
+</html>

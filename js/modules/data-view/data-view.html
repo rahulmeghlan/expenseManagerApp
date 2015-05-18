@@ -1,0 +1,34 @@
+<div class="filter-block">
+    <div class="filter-option">
+        <span>Filter by friend:</span>
+        <select name="filter-friend">
+            <option value="Andy">Andy</option>
+            <option value="Sandy">Sandy</option>
+            <option value="Randy">Randy</option>
+            <option value="Mandy">Mandy</option>
+        </select>
+    </div>
+    <div class="filter-option">
+        <span>Currency:</span>
+        <select name="filter-currency">
+            <option value="dollar">USD</option>
+            <option value="rupee">INR</option>
+            <option value="euro">EUR</option>
+        </select>
+    </div>
+</div>
+<table>
+    <tr>
+        <th id="type" class="center">type</th>
+        <th>name</th>
+        <th>Friends</th>
+        <th id="date">date</th>
+        <th style="text-align: right" id="amount">amount</th>
+        <th class="table-btn">edit</th>
+        <th class="table-btn">delete</th>
+    </tr>
+    <tr id="if-empty">
+        <td colspan="4"><span>Your added items will show up here!</span></td>
+    </tr>
+
+</table>
