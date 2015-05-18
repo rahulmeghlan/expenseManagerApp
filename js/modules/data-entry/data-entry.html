@@ -1,13 +1,13 @@
 <div id="form-box">
-    <h2>Add a new item:</h2>
+    <h2>{{formHeader}}:</h2>
 
-    <div class="add-btn">
+    <div class="add-btn" data-ng-class="{active: isFrOpen}">
         <span class="add-text">Add a friend</span>
 
         <div class="friend-input">
             <div><input type="text" placeholder="Eg: Vandy"/></div>
         </div>
-    <span class="fa-stack fa-lg">
+    <span class="fa-stack fa-lg" data-ng-click="addFriend()">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-plus fa-stack-1x" title="Add a friend"></i>
     </span>
@@ -15,51 +15,50 @@
     <form>
         <div>
             <span>Type:</span>
-            <select name="type">
-                <option value="card">Card</option>
-                <option value="cash">Cash</option>
-                <option value="other">Other</option>
+            <select name="type"  data-ng-model="selectedItem.type" data-ng-change="changeType()">
+                <option data-ng-repeat="item in items" value="{{item.type}}">{{item.type}}</option>
+                <!--<option value="cash">Cash</option>-->
+                <!--<option value="other">Other</option>-->
             </select>
         </div>
         <div>
             <span>Add friend:</span>
-            <select name="friend" multiple="multiple">
-                <option value="Andy">Andy</option>
-                <option value="Sandy">Sandy</option>
-                <option value="Randy">Randy</option>
-                <option value="Mandy">Mandy</option>
+            <select class="test" name="friend" data-ng-model="selectedIndex" data-ng-change="changeFriend()">
+                <option data-ng-repeat="item in items" value="{{$index}}" data-ng-click="">{{item.name}}</option>
             </select>
 
             <div class="error-msg"></div>
         </div>
 
         <div>
-            <span>Name:</span> <input type="text" name="item-name" placeholder="What did you spend on?">
+            <span>Name:</span> <input type="text" name="item-name" value="{{selectedItem.spentOn}}"
+                                      placeholder="What did you spend on?">
 
             <div class="error-msg"><!--Please select an option--></div>
         </div>
 
         <div>
-            <span>Date:</span> <input type="date" name="date">
+            <span>Date:</span> <input type="date" name="date" value="{{selectedItem.date}}">
 
             <div class="error-msg"><!--Please select an option--></div>
         </div>
 
         <div>
             <span>Currency:</span>
-            <select name="currency">
-                <option value="dollar">USD</option>
-                <option value="rupee">INR</option>
-                <option value="euro">EUR</option>
+            <select name="currency" data-ng-model="selectedItem.currency" data-ng-change="changeCurrency()">
+                <option data-ng-repeat="item in items" value="{{item.currency}}">{{item.currency}}</option>
+                <!--<option value="rupee">INR</option>-->
+                <!--<option value="euro">EUR</option>-->
             </select>
         </div>
         <div>
-            <span>Amount:</span> <input type="number" name="amount" placeholder="How much?">
+            <span>Amount:</span> <input type="number" name="amount" value="{{selectedItem.amount}}"
+                                        placeholder="How much?">
 
             <div class="error-msg">Cannot be empty</div>
         </div>
 
-        <div id="button">Add a new expense</div>
+        <div id="button">{{expenseMsg}}</div>
 
     </form>
 </div>
