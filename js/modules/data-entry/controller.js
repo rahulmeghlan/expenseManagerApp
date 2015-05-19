@@ -23,7 +23,7 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
             type: "Other",
             spentOn: "test",
             currency: "Euro",
-            date: new Date(),
+            date: new Date("08-18-1987"),
             amount: 0
         };
         $scope.items = [
@@ -32,7 +32,7 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
                 type: "Card",
                 spentOn: "Grocery",
                 currency: "USD",
-                date: new Date(),
+                date: new Date("08-18-1985"),
                 amount: 10,
                 calculatedAmt: '$ 10'
             },
@@ -41,7 +41,7 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
                 type: "Cash",
                 spentOn: "Bar",
                 currency: "INR",
-                date: new Date(),
+                date: new Date("08-18-1987"),
                 amount: 50,
                 calculatedAmt: 'Rs 50'
             }

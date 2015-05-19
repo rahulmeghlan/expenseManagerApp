@@ -24,11 +24,11 @@
         <th class="table-btn">edit</th>
         <th class="table-btn">delete</th>
     </tr>
-    <tr data-ng-repeat="item in rows">
+    <tr data-ng-repeat="item in rows | orderBy: '-date'">
         <td class="fa fa-credit-{{item.type.toLowerCase()}}"></td>
         <td>{{item.spentOn}}</td>
         <td>{{item.name}}</td>
-        <td>{{item.date}}</td>
+        <td>{{item.date | date:'yyyy-MM-dd'}}</td>
         <td class="amount" data-ng-model="item.calculatedAmt">{{item.calculatedAmt}}</td>
         <td><i class="fa fa-pencil" data-ng-click="editItem($index)"></i></td>
         <td><i class="fa fa-trash-o" data-ng-click="deleteItem($index)"></i></td>
