@@ -76,7 +76,7 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
 
     $scope.changeCurrency = function () {
         for (var i = 0; i < $scope.rows.length; i++) {
-            $scope.rows[i].amount = convertCurrency($scope.rows[i].currency, this.selectedCurrency, parseInt($scope.rows[i].amount.toString().match(/\d+/)[0]));
+            $scope.rows[i].calculatedAmt = convertCurrency($scope.rows[i].currency, this.selectedCurrency, $scope.rows[i].amount);
         }
     };
 

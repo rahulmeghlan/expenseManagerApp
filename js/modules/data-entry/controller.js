@@ -3,6 +3,8 @@
 //todo : need to scope the expenseMgr
 expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService', function ($rootScope, $scope, expenseMgrService) {
 
+    var isFormValid = false;
+
     // This function is used to initialize the app
     var init = function () {
         $scope.expenseMsg = "Add a new expense";
@@ -28,7 +30,8 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
                 spentOn: "Grocery",
                 currency: "USD",
                 date: "2013/08/01",
-                amount: 10
+                amount: 10,
+                calculatedAmt: '$ 10'
             },
             {
                 name: "Candy",
@@ -36,7 +39,8 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
                 spentOn: "Bar",
                 currency: "INR",
                 date: "2013/08/01",
-                amount: 50
+                amount: 50,
+                calculatedAmt: 'Rs 50'
             }
         ];
         $scope.selectedIndex = 1;
@@ -67,11 +71,9 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
     $scope.addFriend = function () {
         if ($scope.isFrOpen) {
             $scope.items.push(angular.copy($scope.newItem));
-
             var lastItem = $scope.items.length - 1;
             $scope.selectedIndex = lastItem;
             $scope.selectedItem = $scope.items[lastItem];
-            $scope.newItem.name = "";
             $scope.isFrOpen = false;
         }
         else {
@@ -79,8 +81,16 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
         }
     };
 
+    $scope.submitEntry = function (event) {
+        if (event.keyCode === 13) {
+            $scope.addFriend();
+        }
+    };
+
     $scope.saveExpense = function () {
         expenseMgrService.items = $scope.items;
+        $scope.selectedItem = $scope.newItem;
+        $scope.selectedIndex = -1;
         $scope.$emit("expenseUpdated");
     };
 
