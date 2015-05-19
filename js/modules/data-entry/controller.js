@@ -3,12 +3,14 @@
 //todo : need to scope the expenseMgr
 expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService', function ($rootScope, $scope, expenseMgrService) {
 
-    var isFormValid = false;
+    var textMsgs = {
+        header: {add: "Add a new item", edit: "Edit expense"},
+        submitBtn: {add: "Add a new expense", edit: "Done"}
+    };
 
     // This function is used to initialize the app
     var init = function () {
-        $scope.expenseMsg = "Add a new expense";
-        $scope.formHeader = "Add a new item";
+        changeToAddMsg();
         $scope.isFrOpen = false;
 
         $scope.paymentTypes = ["Card", "Cash", "Other"];
@@ -59,8 +61,17 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
     var editItems = function (index) {
         $scope.selectedItem = $scope.items[index];
         $scope.selectedIndex = index;
-        $scope.expenseMsg = "Done";
-        $scope.formHeader = "Edit expense";
+        changeToEditMsg();
+    };
+
+    var changeToEditMsg = function () {
+        $scope.expenseMsg = textMsgs.submitBtn.edit;
+        $scope.formHeader = textMsgs.header.edit;
+    };
+
+    var changeToAddMsg = function () {
+        $scope.expenseMsg = textMsgs.submitBtn.add;
+        $scope.formHeader = textMsgs.header.add;
     };
 
 
@@ -69,6 +80,7 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
     };
 
     $scope.addFriend = function () {
+        changeToAddMsg();
         if ($scope.isFrOpen) {
             $scope.items.push(angular.copy($scope.newItem));
             var lastItem = $scope.items.length - 1;
