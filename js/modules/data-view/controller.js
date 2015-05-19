@@ -79,12 +79,18 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
         }
     };
 
-    $scope.deleteItem = function (index) {
-        $scope.rows.splice(index, 1);
+    $scope.deleteItem = function (name) {
+        for(var i = 0; i < $scope.rows.length; i++){
+            if($scope.rows[i].name === name){
+                $scope.rows.splice(i, 1);
+                break;
+            }
+        }
+
     };
 
-    $scope.editItem = function (index) {
-        $scope.$emit("editItem", index);
+    $scope.editItem = function (name) {
+        $scope.$emit("editItem", name);
     };
 
     bindEvents();

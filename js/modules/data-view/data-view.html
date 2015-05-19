@@ -1,37 +1,39 @@
-<div class="filter-block">
-    <div class="filter-option">
-        <span>Filter by friend:</span>
-        <select name="filter-friend" data-ng-model="selectedFriend" data-ng-change="selectInfo()">
-            <option data-ng-repeat="friend in friends track by $index" value="{{friend}}">{{friend}}</option>
-        </select>
+<div data-ng-controller="dataView">
+    <div class="filter-block">
+        <div class="filter-option">
+            <span>Filter by friend:</span>
+            <select name="filter-friend" data-ng-model="selectedFriend" data-ng-change="selectInfo()">
+                <option data-ng-repeat="friend in friends track by $index" value="{{friend}}">{{friend}}</option>
+            </select>
+        </div>
+        <div class="filter-option">
+            <span>Currency:</span>
+            <select name="filter-currency" data-ng-model="selectedCurrency" data-ng-change="changeCurrency()">
+                <option data-ng-repeat="currency in currencies" value="{{currency}}"
+                        data-ng-selected="currency === selectedCurrency">{{currency}}
+                </option>
+            </select>
+        </div>
     </div>
-    <div class="filter-option">
-        <span>Currency:</span>
-        <select name="filter-currency" data-ng-model="selectedCurrency" data-ng-change="changeCurrency()">
-            <option data-ng-repeat="currency in currencies" value="{{currency}}"
-                    data-ng-selected="currency === selectedCurrency">{{currency}}
-            </option>
-        </select>
-    </div>
-</div>
-<table>
-    <tr>
-        <th id="type" class="center">type</th>
-        <th>name</th>
-        <th>Friends</th>
-        <th id="date">date</th>
-        <th style="text-align: right" id="amount">amount</th>
-        <th class="table-btn">edit</th>
-        <th class="table-btn">delete</th>
-    </tr>
-    <tr data-ng-repeat="item in rows | orderBy: '-date'">
-        <td class="fa fa-credit-{{item.type.toLowerCase()}}"></td>
-        <td>{{item.spentOn}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.date | date:'yyyy-MM-dd'}}</td>
-        <td class="amount" data-ng-model="item.calculatedAmt">{{item.calculatedAmt}}</td>
-        <td><i class="fa fa-pencil" data-ng-click="editItem($index)"></i></td>
-        <td><i class="fa fa-trash-o" data-ng-click="deleteItem($index)"></i></td>
-    </tr>
+    <table>
+        <tr>
+            <th id="type" class="center">type</th>
+            <th>name</th>
+            <th>Friends</th>
+            <th id="date">date</th>
+            <th style="text-align: right" id="amount">amount</th>
+            <th class="table-btn">edit</th>
+            <th class="table-btn">delete</th>
+        </tr>
+        <tr data-ng-repeat="item in rows | orderBy: '-date'">
+            <td>{{item.type}}</td>
+            <td>{{item.spentOn}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.date | date:'yyyy-MM-dd'}}</td>
+            <td class="amount" data-ng-model="item.calculatedAmt">{{item.calculatedAmt}}</td>
+            <td><i class="fa fa-pencil" data-ng-click="editItem(item.name)"></i></td>
+            <td><i class="fa fa-trash-o" data-ng-click="deleteItem(item.name)"></i></td>
+        </tr>
 
-</table>
+    </table>
+</div>

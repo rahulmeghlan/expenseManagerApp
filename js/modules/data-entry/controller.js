@@ -68,15 +68,20 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
     };
 
     var bindEvents = function () {
-        var editItem = $rootScope.$on("editItem", function (event, index) {
-            editItems(index);
+        var editItem = $rootScope.$on("editItem", function (event, name) {
+            editItems(name);
         });
         $scope.$on("$destroy", editItem);
     };
 
-    var editItems = function (index) {
-        $scope.selectedItem = $scope.items[index];
-        $scope.selectedIndex = index;
+    var editItems = function (name) {
+        var totalItems = $scope.items.length;
+        for (var i = 0; i < totalItems; i++) {
+            if ($scope.items[i].name === name) {
+                $scope.selectedItem = $scope.items[i];
+                $scope.selectedIndex = i;
+            }
+        }
         changeToEditMsg();
     };
 
@@ -93,6 +98,7 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
     var resetForm = function () {
         $scope.selectedItem = $scope.newItem;
         $scope.selectedIndex = -1;
+        changeToAddMsg();
     };
 
 

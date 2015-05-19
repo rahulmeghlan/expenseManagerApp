@@ -262,3 +262,29 @@ form .error-msg {
     border-radius: 3px;
 }
 
+.date-picker .date-val {
+    width: 200px;
+}
+
+.date-picker table {
+    width: 300px
+}
+
+.date-picker table th {
+    padding: 0;
+}
+
+.date-picker table td {
+    padding: 0;
+}
+
+.date-picker span{
+    width: auto;
+}
+
+.calendar-btn {
+    padding: 10px 15px;
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+}
