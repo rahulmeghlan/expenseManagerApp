@@ -2,7 +2,7 @@
     <div class="filter-option">
         <span>Filter by friend:</span>
         <select name="filter-friend" data-ng-model="selectedFriend" data-ng-change="selectInfo()">
-            <option data-ng-repeat="friend in friends" value="{{friend}}">{{friend}}</option>
+            <option data-ng-repeat="friend in friends track by $index" value="{{friend}}">{{friend}}</option>
         </select>
     </div>
     <div class="filter-option">

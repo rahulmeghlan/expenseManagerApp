@@ -4,8 +4,6 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
 
     var init = function () {
         $scope.friends = ["All"];
-//        $scope.items = ["all"];
-//        $scope.items.push(expenseMgrService.items); // initialise the items based on the default list of data-entry
         $scope.currencies = expenseMgrService.currencies; // initialize the currencies based on the default list of data-entry
 
         $scope.selectedCurrency = $scope.currencies[0];// set the initial value of currencies
@@ -15,6 +13,7 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
     var bindEvents = function () {
         var expenseUpdate = $rootScope.$on("expenseUpdated", function () {
             items = expenseMgrService.items;
+            $scope.friends = ["All"]; //reinitializing the array
             for (var i = 0; i < items.length; i++) {
                 $scope.friends.push(items[i].name);
             }
