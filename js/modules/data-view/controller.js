@@ -82,8 +82,6 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
 
     $scope.deleteItem = function (index) {
         $scope.rows.splice(index, 1);
-        expenseMgrService.items.splice(index, 1);
-        $scope.$emit("deleteItem", index);
     };
 
     $scope.editItem = function (index) {

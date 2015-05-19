@@ -46,13 +46,9 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
     };
 
     var bindEvents = function () {
-        var deleteItem = $rootScope.$on("deleteItem", function (event, index) {
-            $scope.items.splice(index, 1);
-        });
         var editItem = $rootScope.$on("editItem", function (event, index) {
             editItems(index);
         });
-        $scope.$on("$destroy", deleteItem);
         $scope.$on("$destroy", editItem);
     };
 
