@@ -31,7 +31,7 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
                 price = "$ " + (amount * 0.016).toFixed(2);
                 break;
             case "INR_Euro":
-                price = "Euro " + (amount * 0.014).toFixed(2);
+                price = "€ " + (amount * 0.014).toFixed(2);
                 break;
             case "INR_INR":
                 price = "Rs " + (amount).toFixed(2);
@@ -40,7 +40,7 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
                 price = "Rs " + (amount * 63.75).toFixed(2);
                 break;
             case "USD_Euro":
-                price = "Euro " + (amount * 0.89).toFixed(2);
+                price = "€ " + (amount * 0.89).toFixed(2);
                 break;
             case "USD_USD":
                 price = "$  " + (amount).toFixed(2);
@@ -52,7 +52,7 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
                 price = "$" + (amount * 1.13).toFixed(2);
                 break;
             case "Euro_Euro":
-                price = "Euro " + (amount).toFixed(2);
+                price = "€ " + (amount).toFixed(2);
                 break;
         }
         return price;

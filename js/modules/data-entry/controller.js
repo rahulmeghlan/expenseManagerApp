@@ -63,7 +63,7 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
             $event.preventDefault();
             $event.stopPropagation();
 
-            $scope.datePickerOpened = true;
+            $scope.opened = true;
         };
     };
 

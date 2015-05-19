@@ -49,27 +49,35 @@
             </div>
         </div>
 
-        <!--<div>
-            <span>Date:</span>
-            <input type="text"  class="form-control" datepicker-popup="{{format}}" data-ng-model="selectedItem.date" is-open="datePickerOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" name="date" value="{{selectedItem.date}}">
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            <div class="error-msg" data-ng-show="expenseForm.date.$error.required">
-                Cannot be empty
-            </div>
-        </div>-->
         <div>
-            <span>Date:</span> <input type="date" name="date" value="{{selectedItem.date}}"
+            <span>Date:</span>
+
+            <div class="date-picker">
+                <input type="text" datepicker-popup="{{format}}" data-ng-model="selectedItem.date"
+                       is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                       name="date">
+                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i
+                        class="fa fa-calendar"></i></button>
+                <div class="error-msg" data-ng-show="expenseForm.date.$error.required">
+                    Cannot be empty
+                </div>
+                <div class="error-msg" data-ng-show="expenseForm.date.$error.date">
+                    Should be a date object
+                </div>
+            </div>
+        </div>
+        <!--<div>
+            <span>Date:</span> <input type="date" name="date" value="{{selectedItem.date | date:'yyyy-mm-dd'}}"
                                       data-ng-model="selectedItem.date">
 
-            <div class="error-msg"><!--Please select an option--></div>
-        </div>
+            <div class="error-msg">&lt;!&ndash;Please select an option&ndash;&gt;</div>
+        </div>-->
 
 
         <div>
             <span>Currency:</span>
-            <select name="currency" data-ng-model="selectedItem.currency" data-ng-change="changeCurrency()" required>
+            <select name="currency" data-ng-model="selectedItem.currency" data-ng-change="changeCurrency()"
+                    required>
                 <option data-ng-repeat="currency in currencies" value="{{currency}}"
                         data-ng-selected="currency === selectedItem.currency">{{currency}}
                 </option>
@@ -89,7 +97,7 @@
 
         <!--<div id="button" data-ng-click="saveExpense()">{{expenseMsg}}</div>-->
         <input type="submit" id="button"
-               data-ng-disabled="expenseForm.itemName.$dirty && expenseForm.itemName.$invalid || expenseForm.type.$dirty && expenseForm.type.$invalid || expenseForm.friend.$dirty && expenseForm.friend.$invalid || expenseForm.currency.$dirty && expenseForm.currency.$invalid || expenseForm.amount.$dirty && expenseForm.amount.$invalid"
+               data-ng-disabled="expenseForm.itemName.$dirty && expenseForm.itemName.$invalid || expenseForm.type.$dirty && expenseForm.type.$invalid || expenseForm.friend.$dirty && expenseForm.friend.$invalid || expenseForm.currency.$dirty && expenseForm.currency.$invalid || expenseForm.amount.$dirty && expenseForm.amount.$invalid || expenseForm.date.$dirty && expenseForm.date.$invalid"
                value="{{expenseMsg}}"/>
 
     </form>
