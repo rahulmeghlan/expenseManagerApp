@@ -212,9 +212,9 @@ form .error-msg {
     width: 140px;
 }
 
-#amount {
+/*#amount {
     width: 60px;
-}
+}*/
 
 .table-btn {
     width: 40px;
@@ -267,18 +267,23 @@ form .error-msg {
 }
 
 .date-picker table {
-    width: 300px
+    width: 200px
 }
 
 .date-picker table th {
     padding: 0;
 }
 
-.date-picker table td {
-    padding: 0;
+.date-picker table tr {
+    background-color: #fff;
 }
 
-.date-picker span{
+.date-picker table td {
+    padding: 0;
+    color: #777 !important;
+}
+
+.date-picker span {
     width: auto;
 }
 
@@ -287,4 +292,27 @@ form .error-msg {
     background: #fff;
     border: 0;
     cursor: pointer;
+}
+
+.add-btn {
+    font-size: 16px;
+}
+
+.glyphicon {
+    font-family: FontAwesome;
+}
+.glyphicon-chevron-right:before {
+    content: "\f054";
+}
+.glyphicon-chevron-left:before {
+    content: "\f053";
+}
+.fa.cash:before {
+    content: "\f0d6";
+}
+.fa.card:before {
+    content: "\f09d";
+}
+.fa.other:before {
+    content: "\f187";
 }

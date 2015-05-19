@@ -26,7 +26,7 @@
             <th class="table-btn">delete</th>
         </tr>
         <tr data-ng-repeat="item in rows | orderBy: '-date'">
-            <td>{{item.type}}</td>
+            <td class="fa {{item.type.toLowerCase()}}"></td>
             <td>{{item.spentOn}}</td>
             <td>{{item.name}}</td>
             <td>{{item.date | date:'yyyy-MM-dd'}}</td>
