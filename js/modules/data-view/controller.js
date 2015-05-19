@@ -1,6 +1,7 @@
 expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', function ($rootScope, $scope, expenseMgrService) {
 
     var items = [];
+    var invertedArray = [];
 
     var init = function () {
         $scope.friends = ["All"];
@@ -58,6 +59,20 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
         return price;
     };
 
+    var revertArray = function (fieldName) {
+        var totalItems = $scope.rows.length,
+            temp = {};
+        invertedArray = $scope.rows;
+        for (var i = 0; i < totalItems - 1; i++) {
+            if (invertedArray[i][fieldName] < invertedArray[i + 1][fieldName]) {
+                temp = invertedArray[i + 1];
+                invertedArray[i + 1] = invertedArray[i];
+                invertedArray[i] = temp;
+            }
+        }
+        $scope.rows = invertedArray;
+    };
+
     // todo : this can be refactored much better
     $scope.selectInfo = function () {
         $scope.rows = [];
@@ -67,10 +82,11 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
         } else {
             for (var i = 0; i < items.length; i++) {
                 if (items[i].name === selectedFriend) {
-                    $scope.rows[0] = items[i];
+                    $scope.rows[i] = items[i];
                 }
             }
         }
+        revertArray("date");
     };
 
     $scope.changeCurrency = function () {
@@ -79,16 +95,18 @@ expenseMgr.controller('dataView', ['$rootScope', '$scope', 'ExpenseMgrService', 
         }
     };
 
-    $scope.deleteItem = function (name) {
-        for(var i = 0; i < $scope.rows.length; i++){
-            if($scope.rows[i].name === name){
+    $scope.deleteItem = function (index) {
+        /*for (var i = 0; i < $scope.rows.length; i++) {
+            if ($scope.rows[i].name === name) {
                 $scope.rows.splice(i, 1);
                 break;
             }
-        }
+        }*/
+        $scope.rows.splice(index, 1);
 
     };
 
+    // todo : much work needs to be done in this
     $scope.editItem = function (name) {
         $scope.$emit("editItem", name);
     };

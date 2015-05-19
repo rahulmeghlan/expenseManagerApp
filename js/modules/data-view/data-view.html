@@ -32,7 +32,7 @@
             <td>{{item.date | date:'yyyy-MM-dd'}}</td>
             <td class="amount" data-ng-model="item.calculatedAmt">{{item.calculatedAmt}}</td>
             <td><i class="fa fa-pencil" data-ng-click="editItem(item.name)"></i></td>
-            <td><i class="fa fa-trash-o" data-ng-click="deleteItem(item.name)"></i></td>
+            <td><i class="fa fa-trash-o" data-ng-click="deleteItem($index)"></i></td>
         </tr>
 
     </table>
