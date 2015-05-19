@@ -11,6 +11,6 @@ angular.element(document).ready(function () {
     angular.bootstrap(document, ['simpleExpenseMgr']);
 });
 
-var expenseMgr = angular.module('simpleExpenseMgr', []);
+var expenseMgr = angular.module('simpleExpenseMgr', ['ui.bootstrap']);
 
 

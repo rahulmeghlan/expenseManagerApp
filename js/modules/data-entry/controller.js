@@ -11,6 +11,7 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
     // This function is used to initialize the app
     var init = function () {
         changeToAddMsg();
+        datePicker();
         $scope.isFrOpen = false;
 
         $scope.paymentTypes = ["Card", "Cash", "Other"];
@@ -22,7 +23,7 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
             type: "Other",
             spentOn: "test",
             currency: "Euro",
-            date: "2013/08/01",
+            date: new Date(),
             amount: 0
         };
         $scope.items = [
@@ -31,7 +32,7 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
                 type: "Card",
                 spentOn: "Grocery",
                 currency: "USD",
-                date: "2013/08/01",
+                date: new Date(),
                 amount: 10,
                 calculatedAmt: '$ 10'
             },
@@ -40,7 +41,7 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
                 type: "Cash",
                 spentOn: "Bar",
                 currency: "INR",
-                date: "2013/08/01",
+                date: new Date(),
                 amount: 50,
                 calculatedAmt: 'Rs 50'
             }
@@ -49,6 +50,21 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
         $scope.selectedItem = $scope.items[$scope.selectedIndex];
         expenseMgrService.items = $scope.items;
         expenseMgrService.currencies = $scope.currencies;
+    };
+
+    var datePicker = function () {
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+        $scope.format = 'dd-MMMM-yyyy';
+
+        $scope.openDatePicker = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.datePickerOpened = true;
+        };
     };
 
     var bindEvents = function () {
@@ -72,6 +88,11 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
     var changeToAddMsg = function () {
         $scope.expenseMsg = textMsgs.submitBtn.add;
         $scope.formHeader = textMsgs.header.add;
+    };
+
+    var resetForm = function () {
+        $scope.selectedItem = $scope.newItem;
+        $scope.selectedIndex = -1;
     };
 
 
@@ -101,9 +122,8 @@ expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService',
 
     $scope.saveExpense = function () {
         expenseMgrService.items = $scope.items;
-        $scope.selectedItem = $scope.newItem;
-        $scope.selectedIndex = -1;
         $scope.$emit("expenseUpdated");
+        resetForm();
     };
 
     init();

@@ -1,4 +1,4 @@
-<div id="form-box">
+<div id="form-box" xmlns="http://www.w3.org/1999/html">
     <h2>{{formHeader}}:</h2>
 
     <div class="add-btn" data-ng-class="{active: isFrOpen}">
@@ -12,49 +12,66 @@
         <i class="fa fa-plus fa-stack-1x" title="Add a friend"></i>
     </span>
     </div>
-    <form>
+    <form name="expenseForm" data-ng-submit="saveExpense()" novalidate >
         <div>
             <span>Type:</span>
-            <select name="type"  data-ng-model="selectedItem.type" data-ng-change="changeType()">
+            <select name="type"  data-ng-model="selectedItem.type" data-ng-change="changeType()" required>
                 <option data-ng-repeat="type in paymentTypes" value="{{type}}" data-ng-selected="type === selectedItem.type">{{type}}</option>
             </select>
+            <div class="error-msg" data-ng-show="expenseForm.type.$error.required">
+                Cannot be empty
+            </div>
         </div>
         <div>
             <span>Add friend:</span>
-            <select class="test" name="friend" data-ng-model="selectedIndex" data-ng-change="changeFriend()">
+            <select class="test" name="friend" data-ng-model="selectedIndex" data-ng-change="changeFriend()" required>
                 <option data-ng-repeat="item in items" value="{{$index}}" data-ng-selected="selectedIndex === $index">{{item.name}}</option>
             </select>
 
-            <div class="error-msg"></div>
+            <div class="error-msg" data-ng-show="expenseForm.friend.$error.required">
+                Cannot be empty
+            </div>
         </div>
 
         <div>
-            <span>Name:</span> <input type="text" name="item-name" value="{{selectedItem.spentOn}}"
-                                      placeholder="What did you spend on?" data-ng-model="selectedItem.spentOn">
+            <span>Name:</span> <input type="text" name="itemName" value="{{selectedItem.spentOn}}"
+                                      placeholder="What did you spend on?" data-ng-model="selectedItem.spentOn" required>
 
-            <div class="error-msg"><!--Please select an option--></div>
+            <div class="error-msg" data-ng-show="expenseForm.itemName.$error.required">
+                Cannot be empty
+            </div>
         </div>
 
         <div>
-            <span>Date:</span> <input type="date" name="date" value="{{selectedItem.date}}">
-
-            <div class="error-msg"><!--Please select an option--></div>
+            <span>Date:</span>
+            <input type="text"  class="form-control" datepicker-popup="{{format}}" data-ng-model="selectedItem.date" is-open="datePickerOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" name="date" value="{{selectedItem.date}}">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            <div class="error-msg" data-ng-show="expenseForm.date.$error.required">
+                Cannot be empty
+            </div>
         </div>
 
         <div>
             <span>Currency:</span>
-            <select name="currency" data-ng-model="selectedItem.currency" data-ng-change="changeCurrency()">
+            <select name="currency" data-ng-model="selectedItem.currency" data-ng-change="changeCurrency()" required>
                 <option data-ng-repeat="currency in currencies" value="{{currency}}" data-ng-selected="currency === selectedItem.currency">{{currency}}</option>
             </select>
         </div>
         <div>
             <span>Amount:</span> <input type="number" name="amount" value="{{selectedItem.amount}}"
-                                        placeholder="How much?" data-ng-model="selectedItem.amount">
+                                        placeholder="How much?" data-ng-model="selectedItem.amount" required>
 
-            <div class="error-msg">Cannot be empty</div>
+            <div class="error-msg" data-ng-show="expenseForm.amount.$error.required">
+                Cannot be empty
+            </div>
         </div>
 
-        <div id="button" data-ng-click="saveExpense()">{{expenseMsg}}</div>
+        <!--<div id="button" data-ng-click="saveExpense()">{{expenseMsg}}</div>-->
+        <input type="submit" id="button"
+               data-ng-disabled="expenseForm.itemName.$dirty && expenseForm.itemName.$invalid || expenseForm.type.$dirty && expenseForm.type.$invalid || expenseForm.friend.$dirty && expenseForm.friend.$invalid || expenseForm.currency.$dirty && expenseForm.currency.$invalid || expenseForm.amount.$dirty && expenseForm.amount.$invalid"
+               value="{{expenseMsg}}" />
 
     </form>
 </div>
