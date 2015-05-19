@@ -66,6 +66,9 @@
             <div class="error-msg" data-ng-show="expenseForm.amount.$error.required">
                 Cannot be empty
             </div>
+            <div class="error-msg" data-ng-show="expenseForm.amount.$error.number">
+                Should only be a number
+            </div>
         </div>
 
         <!--<div id="button" data-ng-click="saveExpense()">{{expenseMsg}}</div>-->
