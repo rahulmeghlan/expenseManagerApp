@@ -1,8 +1,8 @@
 <div class="filter-block">
     <div class="filter-option">
         <span>Filter by friend:</span>
-        <select name="filter-friend">
-            <option data-ng-repeat="item in items" value="{{item.name}}">{{item.name}}</option>
+        <select name="filter-friend" data-ng-model="selectedFriend" data-ng-change="selectInfo()">
+            <option data-ng-repeat="friend in friends" value="{{friend}}">{{friend}}</option>
         </select>
     </div>
     <div class="filter-option">
@@ -24,14 +24,14 @@
         <th class="table-btn">edit</th>
         <th class="table-btn">delete</th>
     </tr>
-    <tr data-ng-repeat="item in items">
-        <td>{{item.type}}</td>
+    <tr data-ng-repeat="item in rows">
+        <td class="fa fa-credit-{{item.type.toLowerCase()}}"></td>
         <td>{{item.spentOn}}</td>
         <td>{{item.name}}</td>
         <td>{{item.date}}</td>
-        <td class="amount">{{item.amount}}</td>
-        <td><i class="fa fa-pencil"></i></td>
-        <td><i class="fa fa-trash-o"></i></td>
+        <td class="amount" data-ng-model="item.amount">{{item.amount}}</td>
+        <td><i class="fa fa-pencil" data-ng-click="editItem($index)"></i></td>
+        <td><i class="fa fa-trash-o" data-ng-click="deleteItem($index)"></i></td>
     </tr>
 
 </table>

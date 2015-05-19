@@ -1,7 +1,7 @@
 // This is the controller to handle the dataEntry operations
 
 //todo : need to scope the expenseMgr
-expenseMgr.controller('dataEntry', ['$scope', 'ExpenseMgrService', function ($scope, expenseMgrService) {
+expenseMgr.controller('dataEntry', ['$rootScope', '$scope', 'ExpenseMgrService', function ($rootScope, $scope, expenseMgrService) {
 
     // This function is used to initialize the app
     var init = function () {
@@ -45,6 +45,24 @@ expenseMgr.controller('dataEntry', ['$scope', 'ExpenseMgrService', function ($sc
         expenseMgrService.currencies = $scope.currencies;
     };
 
+    var bindEvents = function () {
+        var deleteItem = $rootScope.$on("deleteItem", function (event, index) {
+            $scope.items.splice(index, 1);
+        });
+        var editItem = $rootScope.$on("editItem", function (event, index) {
+            editItems(index);
+        });
+        $scope.$on("$destroy", deleteItem);
+        $scope.$on("$destroy", editItem);
+    };
+
+    var editItems = function (index) {
+        $scope.selectedItem = $scope.items[index];
+        $scope.selectedIndex = index;
+        $scope.expenseMsg = "Done";
+        $scope.formHeader = "Edit expense";
+    };
+
 
     $scope.changeFriend = function () {
         $scope.selectedItem = $scope.items[parseInt(this.selectedIndex)];
@@ -53,6 +71,7 @@ expenseMgr.controller('dataEntry', ['$scope', 'ExpenseMgrService', function ($sc
     $scope.addFriend = function () {
         if ($scope.isFrOpen) {
             $scope.items.push(angular.copy($scope.newItem));
+
             var lastItem = $scope.items.length - 1;
             $scope.selectedIndex = lastItem;
             $scope.selectedItem = $scope.items[lastItem];
@@ -70,4 +89,5 @@ expenseMgr.controller('dataEntry', ['$scope', 'ExpenseMgrService', function ($sc
     };
 
     init();
+    bindEvents();
 }]);
